@@ -7,14 +7,17 @@
 
 
 // core selector script start (核心选择器 开始)
-var $ = function(){
-	return new Max();
+var $ = function(obj){
+	return new Max(obj);
 };
 
-function Max(){
+function Max(obj){
 	// create a array script start (创建一个数组，来保存获取到的节点和节点的数组 开始)
 	this.elements = [];
 	// create a array script end (创建一个数组，来保存获取到的节点和节点的数组 结束)
+	if(obj != undefined){
+		this.elements[0] = obj;
+	};
 };
 // core selector script end (核心选择器 结束)
 
@@ -134,6 +137,40 @@ Max.prototype.html = function(value){
 	return this;
 };
 // set innerHTML script end (设置innerHTML 结束)
+
+
+
+// set hover event script start  (设置hover方法 开始)
+Max.prototype.hover = function(over,out){
+	for(var i = 0; i < this.elements.length; i++){
+		this.elements[i].onmouseover = over;
+		this.elements[i].onmouseout = out;
+	};
+	return this;
+};
+// set hover event script end  (设置hover方法 结束)
+
+
+
+// set show event script start (设置show方法 开始)
+Max.prototype.show = function(){
+	for(var i = 0; i < this.elements.length; i++){
+		this.elements[i].style.display = "block";
+	};
+	return this;
+};
+// set show event script start (设置show方法 结束)
+
+
+
+// set hide event script start (设置hide方法 开始)
+Max.prototype.hide = function(){
+	for(var i = 0; i < this.elements.length; i++){
+		this.elements[i].style.display = "none";
+	};
+	return this;
+};
+// set hide event script end (设置hide方法 结束)
 
 
 
