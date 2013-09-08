@@ -6,6 +6,10 @@
  */
 
 
+
+
+
+// section:1
 // core selector script start (核心选择器 开始)
 var $ = function(obj){
 	return new Max(obj);
@@ -84,12 +88,7 @@ Max.prototype.getName = function(name){
 Max.prototype.css = function(attr,value){
 	for(var i = 0; i < this.elements.length; i++){
 		if(arguments.length == 1){
-			// return this.elements[i].style[attr];   //inline style
-			if(typeof window.getComputedStyle !== 'undefined'){    //W3C
-				return window.getComputedStyle(this.elements[i],null)[attr];
-			} else if(typeof this.elements[i].currentStyle !== 'undefined'){   //IE
-				return this.elements[i].currentStyle[attr];
-			};
+			return getStyle(this.elements[i],attr);
 		};
 		this.elements[i].style[attr] = value;
 	};
@@ -186,33 +185,51 @@ Max.prototype.click = function(fn){
 
 
 //set center function script start (封装居中显示的方法 开始)
+Max.prototype.center = function(width,height){
+	if(arguments.length == 0){
+		var width = parseInt(this.css('width'));      //动态计算当前元素的宽度
+		var height = parseInt(this.css('height'));    //动态计算当前元素的高度
 
-// version 1:
-// Max.prototype.center = function(width,height){
-// 	var left = (document.documentElement.clientWidth - width)/2;
-// 	var top = (document.documentElement.clientHeight - height)/2;
-// 	for(var i = 0; i < this.elements.length; i++){
-// 		this.elements[i].style.left = left +'px';
-// 		this.elements[i].style.top = top + 'px';
-// 	};
-// 	return this;
-// };
+		var left = (getInner().width - width)/2;
+		var top = (getInner().height - height)/2;
 
-// version 2:
-Max.prototype.center = function(){
-	var width = parseInt(this.css('width'));      //动态计算当前元素的宽度
-	var height = parseInt(this.css('height'));    //动态计算当前元素的高度
-
-	var left = (document.documentElement.clientWidth - width)/2;
-	var top = (document.documentElement.clientHeight - height)/2;
-
-	for(var i = 0; i < this.elements.length; i++){
- 		this.elements[i].style.left = left +'px';
- 		this.elements[i].style.top = top + 'px';
- 	};
- 	return this;
+		for(var i = 0; i < this.elements.length; i++){
+	 		this.elements[i].style.left = left +'px';
+	 		this.elements[i].style.top = top + 'px';
+	 	};
+	} else if(arguments.length == 2){
+	 	var left = (getInner().width - width)/2;
+	 	var top = (getInner().height - height)/2;
+	 	for(var i = 0; i < this.elements.length; i++){
+	 		this.elements[i].style.left = left +'px';
+	 		this.elements[i].style.top = top + 'px';
+	 	};	
+	};
+	 return this;
 };
 // set center function script end (封装居中显示的方法 结束)
+
+
+
+
+Max.prototype.lock = function(){
+	for(var i = 0; i < this.elements.length; i++){
+		this.elements[i].style.width = getInner().width + 'px';
+		this.elements[i].style.height = getInner().height + 'px';
+		this.elements[i].style.display = 'block';
+	};
+	return this;
+};
+
+
+
+Max.prototype.unlock = function(){
+	for(var i = 0; i < this.elements.length; i++){
+		this.elements[i].style.display = 'none';
+	};
+	return this;
+};
+
 
 
 
@@ -226,12 +243,46 @@ Max.prototype.resize = function(fn){
 
 
 
-
-
-
 // core object function end (封装核心对象的原型方法 结束)
 
 
 
 
 
+
+
+
+
+
+
+
+
+// section:2
+// cross browser compatible script start (跨浏览器兼容方法 开始)
+function getInner(){
+	if(typeof window.innerWidth !== 'undefined'){
+		return {
+			width : window.innerWidth,
+			height : window.innerHeight
+		};
+	} else{
+		return {
+			width : document.documentElement.clientWidth,
+			height : document.documentElement.clientHeight
+		};
+	};
+};
+
+
+function getStyle(element,attr){
+	if(typeof window.getComputedStyle !== 'undefined'){    //W3C
+		return window.getComputedStyle(element,null)[attr];
+	} else if(typeof element.currentStyle !== 'undefined'){   //IE
+		return element.currentStyle[attr];
+	};
+}
+
+
+
+
+// cross browser compatible script end (跨浏览器兼容方法 结束)
