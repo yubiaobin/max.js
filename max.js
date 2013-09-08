@@ -185,6 +185,48 @@ Max.prototype.click = function(fn){
 
 
 
+//set center function script start (封装居中显示的方法 开始)
+
+// version 1:
+// Max.prototype.center = function(width,height){
+// 	var left = (document.documentElement.clientWidth - width)/2;
+// 	var top = (document.documentElement.clientHeight - height)/2;
+// 	for(var i = 0; i < this.elements.length; i++){
+// 		this.elements[i].style.left = left +'px';
+// 		this.elements[i].style.top = top + 'px';
+// 	};
+// 	return this;
+// };
+
+// version 2:
+Max.prototype.center = function(){
+	var width = parseInt(this.css('width'));      //动态计算当前元素的宽度
+	var height = parseInt(this.css('height'));    //动态计算当前元素的高度
+
+	var left = (document.documentElement.clientWidth - width)/2;
+	var top = (document.documentElement.clientHeight - height)/2;
+
+	for(var i = 0; i < this.elements.length; i++){
+ 		this.elements[i].style.left = left +'px';
+ 		this.elements[i].style.top = top + 'px';
+ 	};
+ 	return this;
+};
+// set center function script end (封装居中显示的方法 结束)
+
+
+
+// set browser resize function start (封装浏览器重载函数)
+Max.prototype.resize = function(fn){
+	window.onresize = fn;
+	return this;    //总是返回实例对象用于连缀操作
+};
+// set browser resize function end (封装浏览器重载函数)
+
+
+
+
+
 
 
 // core object function end (封装核心对象的原型方法 结束)
