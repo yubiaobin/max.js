@@ -52,12 +52,12 @@ Max.prototype.getClass = function(className){
 };
 
 Max.prototype.eq = function(num){
-	 if(typeof num == "number"){
+	if(typeof num == "number"){
 		var len = this.elements[num];
 		this.elements = [];    //清空原数组
 		this.elements[0] = len;	  //重新把选中的当前索引传给新数组的第一位
 		return this;
-	 };
+	};
 };
 // get class element script end (获取class节点元素 结束)
 
@@ -205,7 +205,7 @@ Max.prototype.center = function(width,height){
 	 		this.elements[i].style.top = top + 'px';
 	 	};	
 	};
-	 return this;
+	return this;
 };
 // set center function script end (封装居中显示的方法 结束)
 
@@ -235,8 +235,19 @@ Max.prototype.unlock = function(){
 
 // set browser resize function start (封装浏览器重载函数)
 Max.prototype.resize = function(fn){
-	window.onresize = fn;
-	return this;    //总是返回实例对象用于连缀操作
+	for(var i = 0; i < this.elements.length; i++){
+		var element = this.elements[i];
+		window.onresize = function(){
+			fn();
+			if(element.offsetLeft > getInner().width - element.offsetWidth){
+				element.style.left = getInner().width - element.offsetWidth + 'px';
+			}
+			if(element.offsetTop > getInner().height - element.offsetHeight){
+				element.style.top = getInner().height - element.offsetHeight + 'px';
+			}
+		};
+	};
+	return this;    
 };
 // set browser resize function end (封装浏览器重载函数)
 
@@ -280,8 +291,13 @@ function getStyle(element,attr){
 	} else if(typeof element.currentStyle !== 'undefined'){   //IE
 		return element.currentStyle[attr];
 	};
-}
+};
 
+
+
+function getEvent(event){
+	return event || window.event;
+};
 
 
 
