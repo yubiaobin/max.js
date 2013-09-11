@@ -302,3 +302,12 @@ function getEvent(event){
 
 
 // cross browser compatible script end (跨浏览器兼容方法 结束)
+
+
+
+
+// extend API entrance start
+Max.prototype.extend = function(name,fn){
+	Max.prototype[name] = fn;
+};
+// extend API entrance end
