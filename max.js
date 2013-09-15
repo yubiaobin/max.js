@@ -11,16 +11,29 @@
 
 // section:1
 // core selector script start (核心选择器 开始)
-var $ = function(obj){
-	return new Max(obj);
+var $ = function(arguments){
+	return new Max(arguments);
 };
 
-function Max(obj){
-	// create a array script start (创建一个数组，来保存获取到的节点和节点的数组 开始)
+
+	
+function Max(arguments){
 	this.elements = [];
-	// create a array script end (创建一个数组，来保存获取到的节点和节点的数组 结束)
-	if(obj != undefined){
-		this.elements[0] = obj;
+	if(typeof arguments == 'string'){
+		switch(arguments.charAt(0)){
+			case '#' :
+				this.getId(arguments.substring(1));
+				break;
+			case '.' :
+				this.getClass(arguments.substring(1));
+				break;
+			default :
+				this.getTag(arguments);
+		};
+	}else if(typeof arguments == "object"){
+		if(arguments != undefined){
+			this.elements[0] = arguments;
+		};
 	};
 };
 // core selector script end (核心选择器 结束)
@@ -30,17 +43,13 @@ function Max(obj){
 
 // core object function start (封装核心对象的原型方法 开始)
 
-
-
-// get Id element script start (获取Id节点元素 开始)
 Max.prototype.getId = function(id){
 	this.elements.push(document.getElementById(id));
 	return this;
 };
-// get Id element script end (获取Id节点元素 结束)
 
 
-// get class element script start (获取class节点元素 开始)
+	
 Max.prototype.getClass = function(className){
 	var all = document.getElementsByTagName('*');
 	for(var i = 0; i < all.length; i++){
@@ -51,19 +60,8 @@ Max.prototype.getClass = function(className){
 	return this;
 };
 
-Max.prototype.eq = function(num){
-	if(typeof num == "number"){
-		var len = this.elements[num];
-		this.elements = [];    //清空原数组
-		this.elements[0] = len;	  //重新把选中的当前索引传给新数组的第一位
-		return this;
-	};
-};
-// get class element script end (获取class节点元素 结束)
 
 
-
-// get Tag element script start (获取标记节点元素 开始)
 Max.prototype.getTag = function(tag){
 	var tags = document.getElementsByTagName(tag);
 	for(var i = 0; i < tags.length; i++){
@@ -71,16 +69,16 @@ Max.prototype.getTag = function(tag){
 	};
 	return this;
 };
-// get Tag element script end (获取标记节点元素 结束)
 
 
 
-Max.prototype.getName = function(name){
-	var tags = document.getElementsByName(name);
-	for(var i = 0; i < tags.length; i++){
-		this.elements.push(tags[i]);
+Max.prototype.eq = function(num){
+	if(typeof num == "number"){
+		var len = this.elements[num];
+		this.elements = [];    //清空原数组
+		this.elements[0] = len;	  //重新把选中的当前索引传给新数组的第一位
+		return this;
 	};
-	return this;
 };
 
 
@@ -302,12 +300,3 @@ function getEvent(event){
 
 
 // cross browser compatible script end (跨浏览器兼容方法 结束)
-
-
-
-
-// extend API entrance start
-Max.prototype.extend = function(name,fn){
-	Max.prototype[name] = fn;
-};
-// extend API entrance end
