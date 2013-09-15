@@ -22,13 +22,13 @@ function Max(arguments){
 	if(typeof arguments == 'string'){
 		switch(arguments.charAt(0)){
 			case '#' :
-				this.getId(arguments.substring(1));
+				this.elements.push(this.getId(arguments.substring(1)));
 				break;
 			case '.' :
-				this.getClass(arguments.substring(1));
+				this.elements = this.getClass(arguments.substring(1));
 				break;
 			default :
-				this.getTag(arguments);
+				this.elements = this.getTag(arguments);
 		};
 	}else if(typeof arguments == "object"){
 		if(arguments != undefined){
@@ -44,32 +44,69 @@ function Max(arguments){
 // core object function start (封装核心对象的原型方法 开始)
 
 Max.prototype.getId = function(id){
-	this.elements.push(document.getElementById(id));
-	return this;
+	return document.getElementById(id);
 };
 
 
 	
-Max.prototype.getClass = function(className){
-	var all = document.getElementsByTagName('*');
+Max.prototype.getClass = function(className,parentNode){
+	var node = null;
+	var temps = [];
+	if(parentNode != undefined){
+		node = parentNode;
+	}else{
+		node = document;
+	};
+	var all = node.getElementsByTagName('*');
 	for(var i = 0; i < all.length; i++){
 		if(all[i].className == className){
-			this.elements.push(all[i]);
+			temps.push(all[i]);
 		};
 	};
-	return this;
+	return temps;
 };
 
 
 
-Max.prototype.getTag = function(tag){
-	var tags = document.getElementsByTagName(tag);
-	for(var i = 0; i < tags.length; i++){
-		this.elements.push(tags[i]);
+Max.prototype.getTag = function(tag,parentNode){
+	var node = null;
+	var temps = [];
+	if(parentNode != undefined){
+		node = parentNode;
+	}else{
+		node = document;
 	};
-	return this;
+	var tags = node.getElementsByTagName(tag);
+	for(var i = 0; i < tags.length; i++){
+		temps.push(tags[i]);
+	};
+	return temps;
 };
 
+
+Max.prototype.find = function(str){
+	var childElements = [];
+	for(var i = 0; i < this.elements.length; i++){
+		switch(str.charAt(0)){
+			case '#' :
+				childElements.push(this.getId(str.substring(1)));
+				break;
+			case '.' :
+				var temps = this.getClass(str.substring(1),this.elements[i]);
+					for(var k = 0; k < temps.length; k++){
+						childElements.push(temps[k]);
+					};
+				break;
+			default :
+				var temps = this.getTag(str,this.elements[i]);
+					for(var k = 0; k < temps.length; k++){
+						childElements.push(temps[k]);
+					};
+		};
+	};
+	this.elements = childElements;
+	return this;
+};
 
 
 Max.prototype.eq = function(num){
