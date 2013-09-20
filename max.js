@@ -19,17 +19,57 @@ var $ = function(arguments){
 	
 function Max(arguments){
 	this.elements = [];
+
 	if(typeof arguments == 'string'){
-		switch(arguments.charAt(0)){
-			case '#' :
-				this.elements.push(this.getId(arguments.substring(1)));
-				break;
-			case '.' :
-				this.elements = this.getClass(arguments.substring(1));
-				break;
-			default :
-				this.elements = this.getTag(arguments);
-		};
+			// css模拟
+		if(arguments.indexOf(' ') != -1){
+			var element = arguments.split(' ');
+			var childElement = [];
+			var node = [];
+
+			for(var i = 0; i < element.length; i++){
+				if(node.length == 0) node.push(document);
+				switch(element[i].charAt(0)){
+					case '#' :
+						childElement = [];
+						childElement.push(this.getId(element[i].substring(1)));
+						node = childElement;
+						break;
+					case '.' :
+						childElement = [];
+						for(var k = 0; k < node.length; k++){
+							var temps = this.getClass(element[i].substring(1),node[k]);
+							for(var t = 0; t < temps.length; t++){
+								childElement.push(temps[t]);
+							}
+						}
+						node = childElement;
+						break;
+					default  :
+						childElement = [];
+						for(var k = 0; k < node.length; k++){
+							var temps = this.getTag(element[i],node[k]);
+							for(var t = 0; t < temps.length; t++){
+								childElement.push(temps[t]);
+							}
+						}
+						node = childElement;
+				}
+			}
+			this.elements = childElement;
+		}else{
+			// find模拟
+			switch(arguments.charAt(0)){
+				case '#' :
+					this.elements.push(this.getId(arguments.substring(1)));
+					break;
+				case '.' :
+					this.elements = this.getClass(arguments.substring(1));
+					break;
+				default :
+					this.elements = this.getTag(arguments);
+			};
+		};	
 	}else if(typeof arguments == "object"){
 		if(arguments != undefined){
 			this.elements[0] = arguments;
