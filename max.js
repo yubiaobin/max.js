@@ -82,7 +82,7 @@ function Max(arguments){
 
 
 // core object function start (封装核心对象的原型方法 开始)
-
+//this in new one
 Max.prototype.getId = function(id){
 	return document.getElementById(id);
 };
