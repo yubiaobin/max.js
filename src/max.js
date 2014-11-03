@@ -86,6 +86,7 @@ function Max(arguments){
 *
 * core object function start (封装核心对象的原型方法 开始)
 */
+
 Max.prototype.getId = function(id){
 	return document.getElementById(id);
 };
@@ -162,7 +163,12 @@ Max.prototype.eq = function(num){
 };
 
 
-// set stylesheet script start (设置CSS 开始)
+
+
+/**
+*
+*  set stylesheet script (设置CSS)
+*/
 Max.prototype.css = function(attr,value){
 	for(var i = 0; i < this.elements.length; i++){
 		if(arguments.length == 1){
@@ -172,11 +178,14 @@ Max.prototype.css = function(attr,value){
 	};
 	return this;
 };
-// set stylesheet script end (设置CSS 结束)
 
 
 
-// add stylesheet script start (添加CSS 开始)
+
+/**
+*
+*  add stylesheet script (添加CSS)
+*/
 Max.prototype.addClass = function(className){
 	for(var i = 0; i < this.elements.length; i++){
 							// 用正则去匹配如果有该样式 就不重复添加
@@ -186,11 +195,13 @@ Max.prototype.addClass = function(className){
 	};
 	return this;
 };
-// add stylesheet script end (添加CSS 结束)
 
 
 
-// remove stylesheet script start (移除CSS 开始)
+/**
+*
+*  remove stylesheet script (移除CSS)
+*/
 Max.prototype.removeClass = function(className){
 	for(var i = 0; i < this.elements.length; i++){
 		if(this.elements[i].className.match(new RegExp("(\\s|^)" + className + "(\\s|$)"))){
@@ -199,11 +210,12 @@ Max.prototype.removeClass = function(className){
 	};
 	return this;
 };
-// remove stylesheet script end (移除CSS 结束)
 
 
-
-// set innerHTML script start (设置innerHTML 开始)
+/**
+*
+*  set innerHTML script (设置innerHTML)
+*/
 Max.prototype.html = function(value){
 	for(var i = 0; i < this.elements.length; i++){
 		if(arguments.length == 0){
@@ -213,11 +225,13 @@ Max.prototype.html = function(value){
 	};
 	return this;
 };
-// set innerHTML script end (设置innerHTML 结束)
 
 
 
-// set hover event script start  (设置hover方法 开始)
+/**
+*
+*  set hover event script (设置hover方法)
+*/
 Max.prototype.hover = function(over,out){
 	for(var i = 0; i < this.elements.length; i++){
 		this.elements[i].onmouseover = over;
@@ -225,18 +239,20 @@ Max.prototype.hover = function(over,out){
 	};
 	return this;
 };
-// set hover event script end  (设置hover方法 结束)
 
 
 
-// set show event script start (设置show方法 开始)
+/**
+*
+*  set show event script (设置show方法)
+*/
 Max.prototype.show = function(){
 	for(var i = 0; i < this.elements.length; i++){
 		this.elements[i].style.display = "block";
 	};
 	return this;
 };
-// set show event script start (设置show方法 结束)
+
 
 
 
