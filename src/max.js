@@ -240,29 +240,36 @@ Max.prototype.show = function(){
 
 
 
-// set hide event script start (设置hide方法 开始)
+/**
+*
+*  set hide event script (设置hide方法)
+*/
 Max.prototype.hide = function(){
 	for(var i = 0; i < this.elements.length; i++){
 		this.elements[i].style.display = "none";
 	};
 	return this;
 };
-// set hide event script end (设置hide方法 结束)
 
 
 
-// set click event script start (设置click方法 开始)
+/**
+*
+*  set click event script (设置click方法)
+*/
 Max.prototype.click = function(fn){
 	for(var i = 0; i < this.elements.length; i++){
 		this.elements[i].onclick = fn;
 	};
 	return this;
 };
-// set click event script end (设置click方法 结束)
 
 
 
-//set center function script start (封装居中显示的方法 开始)
+/**
+*
+*  set center function script (封装居中显示的方法)
+*/
 Max.prototype.center = function(width,height){
 	if(arguments.length == 0){
 		var width = parseInt(this.css('width'));      //动态计算当前元素的宽度
@@ -285,8 +292,6 @@ Max.prototype.center = function(width,height){
 	};
 	return this;
 };
-// set center function script end (封装居中显示的方法 结束)
-
 
 
 
@@ -309,9 +314,10 @@ Max.prototype.unlock = function(){
 };
 
 
-
-
-// set browser resize function start (封装浏览器重载函数)
+/**
+*
+*  set browser resize function  (封装浏览器重载函数)
+*/
 Max.prototype.resize = function(fn){
 	for(var i = 0; i < this.elements.length; i++){
 		var element = this.elements[i];
@@ -327,7 +333,7 @@ Max.prototype.resize = function(fn){
 	};
 	return this;    
 };
-// set browser resize function end (封装浏览器重载函数)
+
 
 
 
@@ -366,9 +372,9 @@ function getInner(){
 
 
 function getStyle(element,attr){
-	if(typeof window.getComputedStyle !== 'undefined'){    //W3C
+	if(typeof window.getComputedStyle !== 'undefined'){    // W3C
 		return window.getComputedStyle(element,null)[attr];
-	} else if(typeof element.currentStyle !== 'undefined'){   //IE
+	} else if(typeof element.currentStyle !== 'undefined'){   // IE
 		return element.currentStyle[attr];
 	};
 };
