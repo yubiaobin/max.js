@@ -10,8 +10,8 @@
 
 /**
 *
-* section:1
-* core selector script start (核心选择器 开始)
+* Section:1
+* Core selector script start (核心选择器 开始)
 */
 var $ = function(arguments){
 	return new Max(arguments);
@@ -84,7 +84,7 @@ function Max(arguments){
 
 /**
 *
-* core object function start (封装核心对象的原型方法 开始)
+* Core object function start (封装核心对象的原型方法 开始)
 */
 
 Max.prototype.getId = function(id){
@@ -167,7 +167,7 @@ Max.prototype.eq = function(num){
 
 /**
 *
-*  set stylesheet script (设置CSS)
+*  Set stylesheet script (设置CSS)
 */
 Max.prototype.css = function(attr,value){
 	for(var i = 0; i < this.elements.length; i++){
@@ -184,7 +184,8 @@ Max.prototype.css = function(attr,value){
 
 /**
 *
-*  add stylesheet script (添加CSS)
+*  Add stylesheet script (添加CSS)
+*  @param {String} 要添加的CSS属性名
 */
 Max.prototype.addClass = function(className){
 	for(var i = 0; i < this.elements.length; i++){
@@ -200,7 +201,7 @@ Max.prototype.addClass = function(className){
 
 /**
 *
-*  remove stylesheet script (移除CSS)
+*  Remove stylesheet script (移除CSS)
 */
 Max.prototype.removeClass = function(className){
 	for(var i = 0; i < this.elements.length; i++){
@@ -214,7 +215,7 @@ Max.prototype.removeClass = function(className){
 
 /**
 *
-*  set innerHTML script (设置innerHTML)
+*  Set innerHTML script (设置innerHTML)
 */
 Max.prototype.html = function(value){
 	for(var i = 0; i < this.elements.length; i++){
@@ -230,7 +231,7 @@ Max.prototype.html = function(value){
 
 /**
 *
-*  set hover event script (设置hover方法)
+*  Set hover event script (设置hover方法)
 */
 Max.prototype.hover = function(over,out){
 	for(var i = 0; i < this.elements.length; i++){
@@ -244,7 +245,7 @@ Max.prototype.hover = function(over,out){
 
 /**
 *
-*  set show event script (设置show方法)
+*  Set show event script (设置show方法)
 */
 Max.prototype.show = function(){
 	for(var i = 0; i < this.elements.length; i++){
@@ -258,7 +259,7 @@ Max.prototype.show = function(){
 
 /**
 *
-*  set hide event script (设置hide方法)
+*  Set hide event script (设置hide方法)
 */
 Max.prototype.hide = function(){
 	for(var i = 0; i < this.elements.length; i++){
@@ -271,7 +272,7 @@ Max.prototype.hide = function(){
 
 /**
 *
-*  set click event script (设置click方法)
+*  Set click event script (设置click方法)
 */
 Max.prototype.click = function(fn){
 	for(var i = 0; i < this.elements.length; i++){
@@ -284,7 +285,7 @@ Max.prototype.click = function(fn){
 
 /**
 *
-*  set center function script (封装居中显示的方法)
+*  Set center function script (封装居中显示的方法)
 */
 Max.prototype.center = function(width,height){
 	if(arguments.length == 0){
@@ -330,9 +331,11 @@ Max.prototype.unlock = function(){
 };
 
 
+
+
 /**
 *
-*  set browser resize function  (封装浏览器重载函数)
+*  Set browser resize function  (封装浏览器重载函数)
 */
 Max.prototype.resize = function(fn){
 	for(var i = 0; i < this.elements.length; i++){
@@ -356,7 +359,7 @@ Max.prototype.resize = function(fn){
 
 /**
 *
-* core object function end (封装核心对象的原型方法 结束)
+* Core object function end (封装核心对象的原型方法 结束)
 */
 
 
@@ -368,8 +371,8 @@ Max.prototype.resize = function(fn){
 
 /**
 *
-*  section:2
-*  cross browser compatible script start (跨浏览器兼容方法 开始)
+*  Section:2
+*  Cross browser compatible script start (跨浏览器兼容方法 开始)
 */
 
 function getInner(){
@@ -404,6 +407,5 @@ function getEvent(event){
 
 /**
 *
-*  section:2
-*  cross browser compatible script end (跨浏览器兼容方法 结束)
+*  Cross browser compatible script end (跨浏览器兼容方法 结束)
 */
