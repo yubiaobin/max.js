@@ -8,9 +8,11 @@
 
 
 
-
-// section:1
-// core selector script start (核心选择器 开始)
+/**
+*
+* section:1
+* core selector script start (核心选择器 开始)
+*/
 var $ = function(arguments){
 	return new Max(arguments);
 };
@@ -76,13 +78,14 @@ function Max(arguments){
 		};
 	};
 };
-// core selector script end (核心选择器 结束)
 
 
 
 
-// core object function start (封装核心对象的原型方法 开始)
-//this in new one
+/**
+*
+* core object function start (封装核心对象的原型方法 开始)
+*/
 Max.prototype.getId = function(id){
 	return document.getElementById(id);
 };
@@ -329,7 +332,10 @@ Max.prototype.resize = function(fn){
 
 
 
-// core object function end (封装核心对象的原型方法 结束)
+/**
+*
+* core object function end (封装核心对象的原型方法 结束)
+*/
 
 
 
@@ -338,13 +344,12 @@ Max.prototype.resize = function(fn){
 
 
 
+/**
+*
+*  section:2
+*  cross browser compatible script start (跨浏览器兼容方法 开始)
+*/
 
-
-
-
-
-// section:2
-// cross browser compatible script start (跨浏览器兼容方法 开始)
 function getInner(){
 	if(typeof window.innerWidth !== 'undefined'){
 		return {
@@ -375,5 +380,8 @@ function getEvent(event){
 };
 
 
-
-// cross browser compatible script end (跨浏览器兼容方法 结束)
+/**
+*
+*  section:2
+*  cross browser compatible script end (跨浏览器兼容方法 结束)
+*/
